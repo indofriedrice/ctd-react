@@ -1,12 +1,13 @@
-# React + Vite
+# CTD - To Do App Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## This is the repository for CodeTheDream's To Do App Project
 
-Currently, two official plugins are available:
+### Installation Guide:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Clone this repository with command: `git clone git@github.com:indofriedrice/ctd-react.git`
+- Bootstrap a new project with command: `npm create vite@latest . -- --template react`
+- Install all dependencies with command: `npm install`
 
-## Expanding the ESLint configuration
+### How To: Run Development Server
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Run with command: `npm run dev`
