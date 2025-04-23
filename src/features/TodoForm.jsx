@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import TextInputWithLabel from '../shared/TextInputWithLabel';
 
 // personal note: TodoForm receives onAddTodo as a prop so we can access it.
 function TodoForm({ onAddTodo }) {
@@ -25,16 +26,13 @@ function TodoForm({ onAddTodo }) {
 
   return (
     <form onSubmit={handleAddTodo}>
-      <label htmlFor="todoTitle">To Do: </label>
-      <input
+      <TextInputWithLabel
+        elementId="todoTitle"
+        labelText="Todo"
         ref={todoTitleInput}
-        name="title"
-        id="todoTitle"
-        // personal note: not properly cited in the direction but this is how a controlled input syntax looks like.
-        // the value holds the current state variable, and onChange is required to update the state variable.
         value={workingTodo}
         onChange={(e) => setWorkingTodo(e.target.value)}
-      ></input>
+      ></TextInputWithLabel>
       <button type="submit" disabled={workingTodo === ''}>
         Add To Do
       </button>
