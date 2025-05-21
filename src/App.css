@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=NTR&display=swap');
+
+/* Global Font */
+body,
+input,
+button {
+  font-family: 'NTR', sans-serif;
+}
+
+/* Background & Root Color */
+body,
+#root {
+  background-color: whitesmoke;
+  margin: 0;
+  padding: 0;
+}
+
+/* Button */
+button {
+  background-color: mediumpurple;
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #888;
+}
+
+/* Text Input */
+input {
+  border: 1px solid #999;
+  color: black;
+}
+
+/* Button & Text Sync */
+input,
+button {
+  font-size: 1rem;
+  padding: 0.3rem 1rem;
+  border-radius: 1rem;
+}

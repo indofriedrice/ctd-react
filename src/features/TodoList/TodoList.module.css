@@ -1,0 +1,8 @@
+.list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.listWrapper {
+  margin-right: 12rem;
+}
