@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import './App.css';
+import styles from './App.module.css';
 import TodoList from './features/TodoList/TodoList';
 import TodoForm from './features/TodoForm';
 import TodosViewForm from './features/TodosViewForm';
@@ -194,137 +195,8 @@ function App() {
     );
   };
 
-  // const updateTodo = async (editedTodo) => {
-  //   const originalTodos = [...todoList];
-
-  //   setTodoList(
-  //     todoList.map((todo) =>
-  //       todo.id === editedTodo.id ? { ...todo, ...editedTodo } : todo
-  //     )
-  //   );
-
-  //   const payload = {
-  //     records: [
-  //       {
-  //         id: editedTodo.id,
-  //         fields: {
-  //           title: editedTodo.title,
-  //           isCompleted: editedTodo.isCompleted,
-  //         },
-  //       },
-  //     ],
-  //   };
-
-  //   const options = {
-  //     method: 'PATCH',
-  //     headers: {
-  //       Authorization: token,
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(payload),
-  //   };
-
-  //   try {
-  //     const resp = await fetch(url, options);
-
-  //     if (!resp.ok) {
-  //       throw new Error(resp.message);
-  //     }
-
-  //     const { records } = await resp.json();
-  //     const updatedTodo = {
-  //       id: records[0]['id'],
-  //       ...records[0].fields,
-  //     };
-
-  //     if (!records[0].fields.isCompleted) {
-  //       updatedTodo.isCompleted = false;
-  //     }
-
-  //     // Utilize same logic as completeTodo
-  //     setTodoList(
-  //       todoList.map((todo) =>
-  //         todo.id === updatedTodo.id ? { ...updatedTodo } : todo
-  //       )
-  //     );
-  //   } catch (error) {
-  //     console.log(error.message);
-  //     setErrorMessage(`${error.message}. Reverting todo...`);
-  //     // UI reverts to original state if fetch unsuccesful
-  //     setTodoList(originalTodos);
-  //   } finally {
-  //     setIsSaving(false);
-  //   }
-  // };
-
-  // const completeTodo = async (id) => {
-  //   const originalTodos = [...todoList];
-
-  //   // Deviating away from the W7 Lesson direction to do optimistic update
-  //   setTodoList(
-  //     todoList.map((todo) =>
-  //       todo.id === id ? { ...todo, isCompleted: true } : todo
-  //     )
-  //   );
-
-  //   const payload = {
-  //     records: [
-  //       {
-  //         id: id,
-  //         fields: {
-  //           isCompleted: true,
-  //         },
-  //       },
-  //     ],
-  //   };
-
-  //   const options = {
-  //     method: 'PATCH',
-  //     headers: {
-  //       Authorization: token,
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(payload),
-  //   };
-
-  //   try {
-  //     const resp = await fetch(url, options);
-
-  //     if (!resp.ok) {
-  //       throw new Error(resp.message);
-  //     }
-
-  //     const { records } = await resp.json();
-  //     const completedTodo = {
-  //       id: records[0]['id'],
-  //       ...records[0].fields,
-  //     };
-
-  //     // If condition and syncing back from server in case of anomaly inputs
-  //     if (!records[0].fields.isCompleted) {
-  //       completedTodo.isCompleted = false;
-  //     }
-
-  //     setTodoList(
-  //       todoList.map((todo) =>
-  //         todo.id === completedTodo.id ? { ...completedTodo } : todo
-  //       )
-  //     );
-  //   } catch (error) {
-  //     console.log(error.message);
-  //     setErrorMessage(`${error.message}. Reverting todo...`);
-  //     // UI reverts to original state if fetch unsuccesful
-  //     setTodoList(originalTodos);
-  //   } finally {
-  //     setIsSaving(false);
-  //   }
-  // };
-
-  // personal note: for the part under TodoList instance to display error, we use the && operator to evaluate errorMessage.
-  // if the state is true (not empty string) it returns condition 2 -> the <div> element, otherwise if is it false (empty) return condition 1.
-
   return (
-    <div>
+    <div className={styles.appContainer}>
       <h1>My Todos</h1>
       <TodoForm onAddTodo={addTodo} isSaving={isSaving} />
       <TodoList
@@ -344,8 +216,7 @@ function App() {
       />
 
       {errorMessage && (
-        <div>
-          <hr />
+        <div className={styles.errorBox}>
           <p>{errorMessage}</p>
           <button onClick={() => setErrorMessage('')}>Dismiss Error</button>
         </div>
