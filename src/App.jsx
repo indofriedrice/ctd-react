@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback, useReducer } from 'react';
+import { Routes, Route, useLocation } from 'react-router';
 import './App.css';
 import styles from './App.module.css';
-import TodoList from './features/TodoList/TodoList';
-import TodoForm from './features/TodoForm';
-import TodosViewForm from './features/TodosViewForm';
+import TodosPage from './pages/TodosPage';
+import About from './pages/About';
+import NotFound from './pages/NotFound';
 import {
   reducer as todosReducer,
   actions as todoActions,
@@ -17,6 +18,7 @@ function App() {
   const [sortField, setSortField] = useState('createdTime');
   const [sortDirection, setSortDirection] = useState('desc');
   const [queryString, setQueryString] = useState('');
+  const [title, setTitle] = useState('Todo List');
 
   const url = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
   const token = `Bearer ${import.meta.env.VITE_PAT}`;
@@ -201,32 +203,45 @@ function App() {
     dispatch({ type: todoActions.clearError });
   };
 
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setTitle('Todo List');
+    } else if (location.pathname === '/about') {
+      setTitle('About');
+    } else {
+      setTitle('Not Found');
+    }
+  }, [location]);
+
   return (
     <div className={styles.appContainer}>
-      <h1>My Todos</h1>
-      <TodoForm onAddTodo={addTodo} isSaving={todoState.isSaving} />
-      <TodoList
-        todoList={todoState.todoList}
-        onCompleteTodo={completeTodo}
-        onUpdateTodo={updateTodo}
-        isLoading={todoState.isLoading}
-      />
-      <hr />
-      <TodosViewForm
-        sortField={sortField}
-        setSortField={setSortField}
-        sortDirection={sortDirection}
-        setSortDirection={setSortDirection}
-        queryString={queryString}
-        setQueryString={setQueryString}
-      />
-
-      {errorMessage && (
-        <div className={styles.errorBox}>
-          <p>{errorMessage}</p>
-          <button onClick={handleError}>Dismiss Error</button>
-        </div>
-      )}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <TodosPage
+              title={title}
+              todoList={todoList}
+              isLoading={isLoading}
+              isSaving={isSaving}
+              errorMessage={errorMessage}
+              onAddTodo={addTodo}
+              onCompleteTodo={completeTodo}
+              onUpdateTodo={updateTodo}
+              sortField={sortField}
+              setSortField={setSortField}
+              sortDirection={sortDirection}
+              setSortDirection={setSortDirection}
+              queryString={queryString}
+              setQueryString={setQueryString}
+              onClearError={handleError}
+            />
+          }
+        />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }

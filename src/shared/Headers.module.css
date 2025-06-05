@@ -1,0 +1,24 @@
+.header {
+  text-align: center;
+  /* border: 2px solid black; */
+}
+
+.nav {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 1rem;
+  /* border: 2px solid black; */
+}
+
+.active {
+  font-weight: bold;
+  color: mediumpurple;
+  text-decoration: underline;
+}
+
+.inactive {
+  color: gray;
+  text-decoration: none;
+}
