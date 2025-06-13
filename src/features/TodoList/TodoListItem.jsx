@@ -51,7 +51,11 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
                 onChange={() => onCompleteTodo(todo.id)}
               />
             </label>
-            <span onClick={() => setIsEditing(true)}>{todo.title}</span>
+            <span onClick={() => setIsEditing(true)} title={todo.title}>
+              {todo.title.length > 36
+                ? todo.title.slice(0, 33) + '...'
+                : todo.title}
+            </span>
           </>
         )}
       </form>

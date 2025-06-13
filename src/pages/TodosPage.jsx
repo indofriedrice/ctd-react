@@ -37,7 +37,12 @@ function TodosPage({
   const itemsPerPage = 8;
   const currentPage = parseInt(searchParams.get('page') || '1', 8);
   const indexOfFirstTodo = (currentPage - 1) * itemsPerPage;
-  const filteredTodoList = todoList;
+
+  const filteredTodoList = todoList
+    .filter((todo) =>
+      todo.title.toLowerCase().includes(queryString.toLowerCase())
+    )
+    .filter((todo) => !todo.isCompleted);
   const totalPages = Math.ceil(filteredTodoList.length / itemsPerPage);
   const paginatedTodoList = filteredTodoList.slice(
     indexOfFirstTodo,
